@@ -2,29 +2,23 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float jumpForce = 10f;
+    public float jumpForce = 8f;
+    public float springForce = 20f;
     public float moveSpeed = 5f;
     public bool useAccelerometer = true;
-    public LayerMask platformLayer;
 
     private Rigidbody2D rb;
     private Collider2D playerCollider;
-    private float screenWidth;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        playerCollider = GetComponent<Collider2D>(); // Obtener el collider del jugador
-
-        // Calcula el ancho de la pantalla en unidades del mundo
-        float halfHeight = Camera.main.orthographicSize;
-        screenWidth = Camera.main.aspect * halfHeight * 2f;
+        playerCollider = GetComponent<Collider2D>();
     }
 
     void FixedUpdate()
     {
         HandleMovement();
-        HandleScreenWrap();
     }
 
     void Update()
@@ -33,7 +27,7 @@ public class PlayerController : MonoBehaviour
         if (transform.position.y < Camera.main.transform.position.y - 7)
         {
             Debug.Log("Game Over");
-            gameObject.SetActive(false); // Desactiva el objeto del jugador handlear perder
+            gameObject.SetActive(false);
         }
     }
 
@@ -44,27 +38,10 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
     }
 
-    private void HandleScreenWrap()
-    {
-        // Convierte las coordenadas del jugador al espacio de la cámara
-        Vector3 screenPosition = Camera.main.WorldToViewportPoint(transform.position);
-
-        if (screenPosition.x < 0)
-        {
-            screenPosition.x = 1; // Aparece por la derecha
-        }
-        else if (screenPosition.x > 1)
-        {
-            screenPosition.x = 0; // Aparece por la izquierda
-        }
-
-        transform.position = Camera.main.ViewportToWorldPoint(screenPosition);
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Verifica si el jugador entra en contacto con una plataforma
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Platform"))
+        // Verifica el tipo de objeto con el que el jugador colisiona
+        if (collision.CompareTag("Platform"))
         {
             // Analiza si el jugador viene desde arriba
             if (transform.position.y > collision.bounds.max.y && rb.velocity.y <= 0)
@@ -72,10 +49,20 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Rebote desde arriba");
                 rb.velocity = Vector2.up * jumpForce;
             }
-            else
+        }
+        else if (collision.CompareTag("Spring"))
+        {
+            // colision muelle desde arriba igual que la plataforma
+            if (transform.position.y > collision.bounds.max.y && rb.velocity.y <= 0)
             {
-                Debug.Log("Entró desde abajo o lado, no hace nada");
+                Debug.Log("Rebote desde muelle");
+                rb.velocity = Vector2.up * springForce;
             }
+        }
+        else if (collision.CompareTag("Enemy"))
+        {
+            gameObject.SetActive(false);
+            Debug.Log("Colisión con enemigo game lost");
         }
     }
 }

@@ -127,11 +127,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 8
+  springForce: 20
   moveSpeed: 5
-  useAccelerometer: 1
-  platformLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  useAccelerometer: 0
 --- !u!61 &7904945267507180326
 BoxCollider2D:
   m_ObjectHideFlags: 0

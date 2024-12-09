@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -23,11 +25,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // Detecta si el jugador cae por debajo de la cámara
+        // Detecta si el jugador cae por debajo de la cï¿½mara
         if (transform.position.y < Camera.main.transform.position.y - 7)
         {
             Debug.Log("Game Over");
             gameObject.SetActive(false);
+            //para probar
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
@@ -36,6 +40,24 @@ public class PlayerController : MonoBehaviour
         // Movimiento horizontal
         float horizontalInput = useAccelerometer ? Input.acceleration.x : Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
+        Debug.Log("input" + horizontalInput);
+        //Orientacion personaje
+        if (horizontalInput > 0) // Se mueve a la derecha
+        {
+            // Asegura que la escala X sea positiva
+            if (transform.localScale.x > 0)
+            {
+                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            }
+        }
+        else if (horizontalInput < 0) // Se mueve a la izquierda
+        {
+            // Asegura que la escala X sea negativa
+            if (transform.localScale.x < 0)
+            {
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -62,7 +84,10 @@ public class PlayerController : MonoBehaviour
         else if (collision.CompareTag("Enemy"))
         {
             gameObject.SetActive(false);
-            Debug.Log("Colisión con enemigo game lost");
+            Debug.Log("Colisiï¿½n con enemigo game lost");
+
+            //para probar
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

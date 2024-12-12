@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
+    
     protected virtual void Update()
     {
-        // Obtiene la posición del límite inferior de la cámara
+        // Obtiene la posiciï¿½n del lï¿½mite inferior de la cï¿½mara
         float cameraBottom = Camera.main.transform.position.y - Camera.main.orthographicSize -0.2f;
 
-        // Desactiva la plataforma si está fuera del rango de visión de la cámara
+        // Desactiva la plataforma si estï¿½ fuera del rango de visiï¿½n de la cï¿½mara
         if (transform.position.y < cameraBottom)
         {
             gameObject.SetActive(false);
         }
     }
+
 }

@@ -12,11 +12,13 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
     private Collider2D playerCollider;
+    private SceneController sceneController;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
+        sceneController = FindObjectOfType<SceneController>();
     }
 
     void FixedUpdate()
@@ -30,9 +32,10 @@ public class PlayerController : MonoBehaviour
         if (transform.position.y < Camera.main.transform.position.y - 7)
         {
             Debug.Log("Game Over :(");
+            sceneController.EndGame();
             gameObject.SetActive(false);
             //para probar
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
@@ -112,7 +115,10 @@ public class PlayerController : MonoBehaviour
         }
         else if (collision.CompareTag("Finish"))
         {
-            Debug.Log("Game Over :))");       
+            rb.velocity = Vector2.zero; // Detiene el movimiento actual
+            rb.isKinematic = true;
+            Debug.Log("Game Over :))");  
+            sceneController.EndGame();     
         }
     }
 }

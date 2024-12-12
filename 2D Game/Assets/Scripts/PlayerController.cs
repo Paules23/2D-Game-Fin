@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
         if (transform.position.y < Camera.main.transform.position.y - 7)
         {
             Debug.Log("Game Over :(");
-            sceneController.EndGame();
+            sceneController.Lost();
             gameObject.SetActive(false);
             //para probar
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -109,9 +109,9 @@ public class PlayerController : MonoBehaviour
         {
             gameObject.SetActive(false);
             Debug.Log("Colisi�n con enemigo game lost");
-
+            sceneController.Lost();
             //para probar
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         else if (collision.CompareTag("Finish"))
         {

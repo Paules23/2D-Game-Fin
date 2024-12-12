@@ -10,14 +10,16 @@ public class SceneController : MonoBehaviour
     private string puntosClave = "PuntosNivel1";  // Clave para PlayerPrefs
     private string bestScoreClave = "BestScore"; // Clave para el mejor puntaje
     public TMP_Text pointsText;
-    public GameObject gameOver;
+    public GameObject gameOverWin;
+    public GameObject gameOverLost;
     public GameObject puntuacion;
 
     public void Start()
     {
         localPoints = 0;
         pointsText.text = localPoints.ToString();
-        gameOver.SetActive(false);
+        gameOverWin.SetActive(false);
+        gameOverLost.SetActive(false);
         puntuacion.SetActive(true);
     }
 
@@ -48,7 +50,16 @@ public class SceneController : MonoBehaviour
             PlayerPrefs.Save();
         // Cargar otra escena o reiniciar el nivel (opcional)
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        gameOver.SetActive(true);
+        gameOverWin.GetComponent<GameOverController>().SetUp(localPoints);
+        gameOverWin.SetActive(true);
+        puntuacion.SetActive(false);
+    }
+
+    public void Lost()
+    {
+        Debug.Log("estás en LOST");
+        gameOverLost.SetActive(true);
+        //pongo un pequenno retraso pq si no se activa todo, prob no sea la forma mas eficiente pero tengo suenno
         puntuacion.SetActive(false);
     }
 

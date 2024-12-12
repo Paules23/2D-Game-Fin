@@ -7,6 +7,8 @@ TagManager:
   - Platform
   - Spring
   - Enemy
+  - Recolect
+  - ScreenEdge
   layers:
   - Default
   - TransparentFX

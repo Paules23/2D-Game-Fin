@@ -18,7 +18,7 @@ public class BreakingPlatform : Platform
     {
         Debug.Log("Breaking platform");
         isBreaking = true;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         gameObject.SetActive(false);
     }
 }

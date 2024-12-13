@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1ed09492ec6257544b468c1bc26d8747
+guid: dd6f9191491e18645b0643a79d390af6
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Enemy2 (1)_0
+      name: Collectable_anim_0
       rect:
         serializedVersion: 2
-        x: 571
-        y: 2388
-        width: 840
-        height: 1617
+        x: 256
+        y: 1280
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ddd1594bcd54624f8b5f1ae2a0c8334
-      internalID: -614323263
+      spriteID: 77aef0e0475a6694281d058b68a30bbf
+      internalID: 295903803
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy2 (1)_1
+      name: Collectable_anim_1
       rect:
         serializedVersion: 2
-        x: 564
-        y: 349
-        width: 847
-        height: 1606
+        x: 1280
+        y: 1280
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,8 +145,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d3b9f4867685d3546ae455516f813919
-      internalID: -1070075978
+      spriteID: 8f03f9cb05edac04d9888fe22945c4b6
+      internalID: -379119581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Collectable_anim_2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 256
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed528681a993e334589f173ca8a56e6d
+      internalID: -1290200929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Collectable_anim_3
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 256
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ed4316e3ad44484da50e03886107277
+      internalID: 1643553273
       vertices: []
       indices: 
       edges: []
@@ -162,8 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Enemy2 (1)_0: -614323263
-      Enemy2 (1)_1: -1070075978
+      Collectable_anim_0: 295903803
+      Collectable_anim_1: -379119581
+      Collectable_anim_2: -1290200929
+      Collectable_anim_3: 1643553273
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

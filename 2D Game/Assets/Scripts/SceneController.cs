@@ -8,7 +8,10 @@ public class SceneController : MonoBehaviour
 {
     public int localPoints = 0; // Puntos acumulados localmente
     private string puntosClave = "PuntosNivel1";  // Clave para PlayerPrefs
-    private string bestScoreClave = "BestScore"; // Clave para el mejor puntaje
+    private string bestScoreClave1 = "BestScore1"; // Clave para el mejor puntaje
+    private string bestScoreClave2 = "BestScore2"; // Clave para el mejor puntaje
+    private string bestScoreClave3= "BestScore3"; // Clave para el mejor puntaje
+
     public TMP_Text pointsText;
     public GameObject gameOverWin;
     public GameObject gameOverLost;
@@ -32,24 +35,40 @@ public class SceneController : MonoBehaviour
 
     public void EndGame()
     {
-            // Guardar los puntos actuales en PlayerPrefs
-            PlayerPrefs.SetInt(puntosClave, localPoints);
-            
-            // Comparar con el mejor puntaje y actualizar si es necesario
-            int bestScore = PlayerPrefs.GetInt(bestScoreClave, 0); // Valor predeterminado 0
-            if (localPoints > bestScore)
-            {
-                PlayerPrefs.SetInt(bestScoreClave, localPoints);
-                Debug.Log($"¡Nuevo mejor puntaje: {localPoints}!");
-            }
-            else
-            {
-                Debug.Log($"Puntaje final: {localPoints}. Mejor puntaje actual: {bestScore}");
-            }
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        string bestScoreClave;
 
-            PlayerPrefs.Save();
-        // Cargar otra escena o reiniciar el nivel (opcional)
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        switch (sceneIndex)
+        {
+            case 2:
+                bestScoreClave = bestScoreClave1;
+                break;
+            case 3:
+                bestScoreClave = bestScoreClave2;
+                break;
+            case 4:
+                bestScoreClave = bestScoreClave3;
+                break;
+            default:
+                bestScoreClave = bestScoreClave1; //por defecto
+                break;
+        }
+
+        // Comparar con el mejor puntaje y actualizar si es necesario
+        int bestScore = PlayerPrefs.GetInt(bestScoreClave, 0); // Valor predeterminado 0
+        if (localPoints > bestScore)
+        {
+            PlayerPrefs.SetInt(bestScoreClave, localPoints);
+            Debug.Log($"¡New score scene {sceneIndex}: {localPoints}!");
+        }
+        else
+        {
+            Debug.Log($"Puntaje final para la escena {sceneIndex}: {localPoints}. Mejor puntaje actual: {bestScore}");
+        }
+
+        PlayerPrefs.Save();
+
+        // Mostrar pantalla de game over
         gameOverWin.GetComponent<GameOverController>().SetUp(localPoints);
         gameOverWin.SetActive(true);
         puntuacion.SetActive(false);
@@ -70,6 +89,18 @@ public class SceneController : MonoBehaviour
 
     public void HomeScene()
     {
+        SceneManager.LoadScene(0);
+    }
+
+    public void Return()
+    {
         SceneManager.LoadScene(1);
     }
+
+    public void QuitGame()
+    {
+        Debug.Log("Saliendo de la aplicación...");
+        Application.Quit();
+    }
+
 }

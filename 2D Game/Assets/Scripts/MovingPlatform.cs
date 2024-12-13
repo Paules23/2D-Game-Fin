@@ -5,7 +5,7 @@ public class MovingPlatform : Platform
 {
     public float speed = 2f;
     public float range = 2f;
-    public float delay = 0f; // Pau le he añadido un retardo a esto para que no se muevan todas a la vez
+    public float delay = 0f;
     private Vector3 startPosition;
     private bool canMove = false;
 

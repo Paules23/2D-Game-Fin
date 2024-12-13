@@ -9,12 +9,12 @@ public class BreakingPlatform : Platform
     void Start()
     {
         myCollider = GetComponent<Collider2D>();
+        myCollider.enabled = false;
+        myCollider.enabled = true;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //perdon por este if pero me da pereza pensar como hacerlo mas legible
-        if (other.transform.position.y > myCollider.bounds.max.y && other.attachedRigidbody.velocity.y <= 0
-            && other.CompareTag("Player") && !isBreaking)
+        if (other.transform.position.y > myCollider.bounds.max.y && other.CompareTag("Player") && !isBreaking)
         {
             Debug.Log("Entered breaking");
             StartCoroutine(BreakPlatform());

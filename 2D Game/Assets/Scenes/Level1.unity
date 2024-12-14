@@ -813,7 +813,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702190058985922388, guid: 867bfbdbd6532ab4099d37ee6b8ef3c8, type: 3}
       propertyPath: useAccelerometer
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7904945267507180326, guid: 867bfbdbd6532ab4099d37ee6b8ef3c8, type: 3}
       propertyPath: m_Size.x
